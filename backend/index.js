@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
+import path from "path";
 
 import userRoute from "./route/user.route.js"
 
@@ -23,7 +24,16 @@ try {
 }
 
 //defining routes
-app.use("/user",userRoute)
+app.use("/user",userRoute);
+
+if(process.env.NODE_ENV === "production"){
+    const dirPath = path.resolve();
+    app.use(express.static("frontend/dist"));
+    app.get("*", (req , res) => {
+        res.sendFile(path.resolve(dirPath,"frontend","dist","index.html"));
+    })
+}
+
 
 app.listen(PORT , () => {
     console.log(`running on port ${PORT}`);
