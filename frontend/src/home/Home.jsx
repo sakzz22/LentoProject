@@ -6,7 +6,7 @@ import Footer from '../components/Footer'
 function Home() {
   return (
     <>
-    <Navbar></Navbar>
+      <Navbar></Navbar>
       <Banner></Banner>
       <Footer></Footer>
     </>
